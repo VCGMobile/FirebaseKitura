@@ -2,11 +2,11 @@ import Foundation
 import SwiftJWT
 
 public protocol Verifier {
-  func verify(token: String, allowExpired: Bool) throws -> User?
+  func verify(token: String, allowExpired: Bool) throws -> User
 }
 
 extension Verifier {
-  public func verify(token: String) throws -> User? {
+  public func verify(token: String) throws -> User {
     return try verify(token: token, allowExpired: false)
   }
 }
@@ -22,8 +22,11 @@ public struct JWTVerifier: Verifier {
     self.publicCertificateFetcher = publicCertificateFetcher
   }
   
-  public func verify(token: String, allowExpired: Bool = false) throws -> User? {
-    guard var jwt = try JWT.decode(token) else {return nil }
+  public func verify(token: String, allowExpired: Bool = false) throws -> User {
+    guard var jwt = try JWT.decode(token) else {
+      let message = "Firebase ID token is invalid"
+      throw VerificationError(type: .incorrect(key: "sub"), message: message)
+    }
     
     assert(jwt.subject == jwt.userId)
     if !allowExpired {
@@ -62,7 +65,6 @@ public struct JWTVerifier: Verifier {
     if verified == false {
       throw VerificationError(type: .publicKeyError, message: "Firebase public key cannot be verified")
     }
-    print(User(jwt: jwt))
     return User(jwt: jwt)
   }
 }
