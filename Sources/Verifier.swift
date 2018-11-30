@@ -36,9 +36,9 @@ public struct JWTVerifier: Verifier {
     try jwt.verifyAudience(with: projectId)
     try jwt.verifyIssuer(with: projectId)
     
-    guard let keyIdentifier = jwt.header[.kid] as? String else {
-      throw VerificationError(type: .notFound(key: "kid"), message: "Firebase ID token has no 'kid' claim.")
-    }
+    //guard let keyIdentifier = jwt.header[.kid] as? String else {
+    //  throw VerificationError(type: .notFound(key: "kid"), message: "Firebase ID token has no 'kid' claim.")
+    //}
     
     guard let subject = jwt.subject else {
       let message = "Firebase ID token has no 'sub' (subject) claim. \(verifyIdTokenDocsMessage)"
@@ -49,22 +49,20 @@ public struct JWTVerifier: Verifier {
       throw VerificationError(type: .incorrect(key: "sub"), message: message)
     }
     
-    let cert = try publicCertificateFetcher.fetch(with: keyIdentifier) //.makeBytes().base64Decoded
+    /*let cert = try publicCertificateFetcher.fetch(with: keyIdentifier) //.makeBytes().base64Decoded
     print(cert)
     
     guard let publicKey = Data(jwt_base64URLEncodedString: cert, options: []) else {
       throw VerificationError(type: .publicKeyError, message: "Firebase public key cannot be accessed")
     }
     
-    //let publicKeyPath = URL(string: "https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system.gserviceaccount.com")!
-    //let publicKey = try Data(contentsOf: publicKeyPath)
     let algorithm = Algorithm.rs256(publicKey, .publicKey)
     let signedJWT = try jwt.sign(using: algorithm)
     let verified = try JWT.verify(signedJWT!, using: algorithm)
     
     if verified == false {
       throw VerificationError(type: .publicKeyError, message: "Firebase public key cannot be verified")
-    }
+    }*/
     return User(jwt: jwt)
   }
 }
