@@ -66,3 +66,14 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
+FirebaseKitura.xcodeproj/Cryptor_Info.plist
+FirebaseKitura.xcodeproj/CryptorRSA_Info.plist
+FirebaseKitura.xcodeproj/FirebaseKitura_Info.plist
+FirebaseKitura.xcodeproj/HeliumLogger_Info.plist
+FirebaseKitura.xcodeproj/LoggerAPI_Info.plist
+FirebaseKitura.xcodeproj/project.pbxproj
+FirebaseKitura.xcodeproj/SwiftJWT_Info.plist
+FirebaseKitura.xcodeproj/project.xcworkspace/contents.xcworkspacedata
+FirebaseKitura.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+FirebaseKitura.xcodeproj/project.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
+FirebaseKitura.xcodeproj/xcshareddata/xcschemes/FirebaseKitura-Package.xcscheme
